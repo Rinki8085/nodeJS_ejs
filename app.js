@@ -16,23 +16,42 @@ app.set('views','./src/views')
 app.set('view engine','ejs')
 
 // add new restaurent
-app.get('/newrest',(req,res)=>{
+app.get('/newRest',(req,res)=>{
     res.render('admin')
 })
 
 app.post('/addRest',(req,res)=>{
-    var a = req.body.mealtype
-    var out = []
-
-    a.map((data)=>{
+    var mealinput = req.body.mealtype
+    var mealtypeArr = []
+    mealinput.map((data)=>{
         var val = data.split(",")
         var obj = {}
         obj.mealtype = val[0];
         obj.name = val[1]
-        out.push(obj)
-        return out
+        mealtypeArr.push(obj)
     })
-    console.log(req.body);
+
+    var cuisineinput = req.body.cuisine
+    var cuisinetypeArr = []
+    cuisineinput.map((data)=>{
+        var val = data.split(",")
+        var obj = {}
+        obj.cuisine = val[0];
+        obj.name = val[1]
+        cuisinetypeArr.push(obj)
+    })
+
+    var body = {
+        "_id":Math.floor(Math.random()*100000),
+        "name":req.body.name,
+        "locality": req.body.locality,
+        "thumb":req.body.thumb,
+        "cost": req.body.cost,
+        "address": req.body.address,
+        "type": mealtypeArr
+    }
+    res.send(body)
+    
 })
 
 //db connection
