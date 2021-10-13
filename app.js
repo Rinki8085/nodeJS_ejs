@@ -43,15 +43,17 @@ app.post('/addRest',(req,res)=>{
 
     var body = {
         "_id":Math.floor(Math.random()*100000),
+        "city_name":(req.body.city.split(','))[1],
+        "city":(req.body.city.split(','))[0],
         "name":req.body.name,
         "locality": req.body.locality,
         "thumb":req.body.thumb,
         "cost": req.body.cost,
         "address": req.body.address,
-        "type": mealtypeArr
+        "type": mealtypeArr,
+        "Cuisine":cuisinetypeArr
     }
     res.send(body)
-    
 })
 
 //db connection
